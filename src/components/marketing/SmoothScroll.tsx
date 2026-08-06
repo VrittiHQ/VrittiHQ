@@ -25,5 +25,5 @@ export function MarketingSmoothScroll({ children }: { children: React.ReactNode 
     };
   }, []);
 
-  return <div className="mk-page">{children}</div>;
+  return <div className="v-page">{children}</div>;
 }

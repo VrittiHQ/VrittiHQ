@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/copy";
 import "./marketing.css";
 
 export const metadata: Metadata = {
-  title: "VrittiHR — AI Workforce Management",
-  description:
-    "The modern workforce management platform for Indian educational institutions.",
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  openGraph: {
+    siteName: siteConfig.name,
+    type: "website",
+    locale: "en_IN",
+  },
 };
 
 export default function RootLayout({
@@ -13,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

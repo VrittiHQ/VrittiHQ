@@ -1,41 +1,35 @@
-import { Hero } from "@/components/marketing/Hero";
-import { SocialProofStrip } from "@/components/marketing/SocialProofStrip";
-import { TheGap } from "@/components/marketing/TheGap";
-import { Stats } from "@/components/marketing/Stats";
-import { PlatformVision } from "@/components/marketing/PlatformVision";
-import { ProductShowcase } from "@/components/marketing/ProductShowcase";
-import { TheEngine } from "@/components/marketing/TheEngine";
-import { TrustSignals } from "@/components/marketing/TrustSignals";
-import { ClosingCTA } from "@/components/marketing/ClosingCTA";
 import { Nav } from "@/components/marketing/Nav";
 import { Footer } from "@/components/marketing/Footer";
-import { StickyCTA } from "@/components/marketing/StickyCTA";
+import { MarketingSmoothScroll } from "@/components/marketing/SmoothScroll";
+import { Hero } from "@/components/marketing/Hero";
+import { Features } from "@/components/marketing/Features";
+import { BuiltForIndia } from "@/components/marketing/BuiltForIndia";
+import { Vision } from "@/components/marketing/Vision";
+import { ClosingCTA } from "@/components/marketing/ClosingCTA";
 
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/copy";
 
 export const metadata: Metadata = {
-  title: "VrittiHR — The Operating System for Indian Organizations",
-  description:
-    "AI-native HR platform with biometric attendance, automated payroll, and intelligent workforce management. Built for India. Start with HR, scale to everything.",
+  title: `${siteConfig.name} | ${siteConfig.tagline}`,
+  description: siteConfig.description,
+  openGraph: {
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    type: "website",
+  },
 };
 
 export default function LandingPage() {
   return (
-    <div className="mk-page">
+    <MarketingSmoothScroll>
       <Nav />
-      <main>
-        <Hero />
-        <SocialProofStrip />
-        <TheGap />
-        <Stats />
-        <PlatformVision />
-        <ProductShowcase />
-        <TheEngine />
-        <TrustSignals />
-        <ClosingCTA />
-      </main>
+      <Hero />
+      <Features />
+      <BuiltForIndia />
+      <Vision />
+      <ClosingCTA />
       <Footer />
-      <StickyCTA />
-    </div>
+    </MarketingSmoothScroll>
   );
 }
