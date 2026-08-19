@@ -38,3 +38,16 @@ src/
 npm run dev          # Start dev server
 npm run build        # Production build
 ```
+
+## Onboarding (Run Once After Clone)
+```bash
+git config core.hooksPath .agents/hooks
+npm install
+```
+
+## Git Workflow
+```
+feature/your-feature  →  PR to dev  →  release merges dev to main
+```
+- Create feature branches from `dev`
+- Direct pushes to `main` are blocked by pre-push hook
