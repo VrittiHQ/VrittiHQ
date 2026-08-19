@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Pre-commit hook — Vritti Website
+# Activate: git config core.hooksPath .agents/hooks
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+echo -e "${YELLOW}=== Website Pre-commit Checks ===${NC}"
+
+echo "Running eslint..."
+npm run lint --silent || { echo -e "${RED}✗ Lint failed${NC}"; exit 1; }
+
+echo "Running type check..."
+npx tsc --noEmit --quiet || { echo -e "${RED}✗ TypeScript errors found${NC}"; exit 1; }
+
+STAGED=$(git diff --cached --name-only)
+if echo "$STAGED" | grep -qE '\.env$|\.env\.local$'; then
+  echo -e "${RED}✗ .env file staged! Remove it: git reset HEAD .env${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}✓ All checks passed${NC}"
+exit 0

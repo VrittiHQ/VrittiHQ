@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Pre-push hook — blocks direct pushes to main
+# Workflow: feature branch → PR to dev → release merges dev to main
+# Activate: git config core.hooksPath .agents/hooks
+
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+while read local_ref local_sha remote_ref remote_sha; do
+  if [[ "$remote_ref" == "refs/heads/main" ]]; then
+    echo -e "${RED}✗ Direct push to 'main' is blocked.${NC}"
+    echo -e "${YELLOW}Workflow: create a feature branch → push → PR to 'dev'${NC}"
+    echo -e "${YELLOW}Bypass (releases only): git push --no-verify${NC}"
+    exit 1
+  fi
+done
+
+exit 0
